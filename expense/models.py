@@ -9,6 +9,9 @@ class Customer(models.Model):
     birth_date = models.DateField()
     date_created = models.DateTimeField(auto_now_add=True)
 
+    def __str__(self) -> str:
+        return self.username
+
 
 class Expense(models.Model):
 
@@ -43,6 +46,6 @@ class Expense(models.Model):
     amount = models.DecimalField(max_digits=6, decimal_places=2)
     date = models.DateTimeField(auto_now_add=True)
     description = models.TextField()
-    category = models.CharField(max_length=255)
+    category = models.CharField(max_length=255, choices=CATEGORY_CHOICES)
     payment_type = models.CharField(max_length=255, choices=PAYMENT_TYPE_CHOICES)
     customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
